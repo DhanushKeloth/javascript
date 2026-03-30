@@ -63,6 +63,7 @@ li{
     justify-content: space-between;
     align-items: center;
     padding: 3px;
+    gap:10px;
     /* border-bottom: 1px solid #ccc; */
     width: 100%;
     font-size: 13px;
@@ -72,4 +73,21 @@ li{
     font-size: 12px;
     background-color: #b01818;
     color: #fff;
+}
+.edit-btn{
+    padding: 5px 20px;
+    font-size: 12px;
+    background-color: #507bb1;
+    color: #fff;
+}
+.btn-container{
+    display: flex;
+    gap: 10px;
+}
+.task-text:focus{
+    outline: 1px solid #507bb1;
+}
+span{
+    display: flex;
+    gap: 10px;
 }
