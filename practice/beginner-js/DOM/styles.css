@@ -1,0 +1,9 @@
+/* We write the styles in CSS, not JS! */
+.btn {
+  display: none;
+}
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}

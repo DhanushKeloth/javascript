@@ -38,3 +38,31 @@ console.log(!a)
 console.log(10+"20") ///string concatenation
 console.log(10-"5") ///number substraction
 console.log(10*"5") ///number multiplication
+
+//explicit type conversion
+console.log("explicit type conversion")
+console.log(Number("10"))
+console.log(String(10))
+console.log(Boolean(0))
+
+
+//spread operator
+const groupA = ["dhanush","adhi","charan"]
+const groupB=["sandeep","alex","john"]
+const combined= [...groupA,...groupB]
+console.log(combined)
+const obj={
+    name:"dhanush"}
+const obj2={...obj,age:20}
+console.log(obj2)
+
+
+//rest operator
+
+const sum = function(...nums){
+    return nums.reduce((acc,current)=>acc+current,0)
+}
+console.log(sum(10,20,30,40,50))
+console.log(sum(10,20))
+
+
