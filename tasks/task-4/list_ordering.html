@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list ordering</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        .container{
+            width: 400px;
+            margin: 50px auto;
+            /* border:2px solid #ccc; */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1{
+            text-align: center;
+        }
+        #item-list{
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li{
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: grab;
+            border-radius: 5px;
+        }
+        .dragging{
+            opacity: 0.1;
+        }
+        .over{
+            border: 2px dashed #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Drag and Drop to reorder them</h1>
+        <ul id="item-list">
+            <li draggable="true">Item 1</li>
+            <li draggable="true">Item 2</li>
+            <li draggable="true">Item 3</li>
+            <li draggable="true">Item 4</li>
+            <li draggable="true">Item 5</li>
+        </ul>
+    </div>
+    <script src="./listOrdering.js"></script>
+</body>
+</html>
