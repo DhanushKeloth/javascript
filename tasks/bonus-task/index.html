@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SPA Router</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #333;
+      padding: 15px;
+    }
+
+    nav a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #app {
+      padding: 30px;
+    }
+  </style>
+  <body>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div id="app"></div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
