@@ -94,40 +94,62 @@ body {
   border-radius: 5px;
 
 }
-.cart{
-    border: 2px solid black;
-}
+/* cart styling */
 .cart {
   background-color: #f0f0f0;
   grid-area: cart;
   padding: 20px;
+  border: 2px solid black;
+  overflow-y: auto;
 }
+/* each cart item */
 .cart-items {
     /* border: 2px solid black; */
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 20px ;
+  grid-template-rows: auto auto;
   gap: 2px;
   padding: 4px;
+  border-bottom: 1px solid #ccc;
+  /* place-items: center; */
+  align-items: center;
+  
 }
+/* cart item image */
 .cart-items img {
     grid-row:span 2;
   width: 50px;
   height: 50px;
   object-fit: cover;
 }
+/* cart item name */
 .cart-items h3{
     margin:0;
     text-align: center;
     font-size: 15px;
 }
+/* cart item price */
 .cart-items span{
     text-align: center;
     font-size: 15px;
 }
+/* cart items button increment and decrement */
 .cart-items .buttons-group{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+/* increment and decrement button styling in cart */
+.cart-items button{
+    padding: 2px 8px;
+    font-size: 13px;
+}
+/* item remove button styling */
+.cart-items #remove-btn{
+    background-color: #1b5ec2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
 }
