@@ -1,43 +1,42 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping cart</title>
-    <link rel="stylesheet" href="./style.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <div class="navbar">
-        <h1>Shopping Cart</h1>
-        <input type="search" placeholder="Search products..." />
-        <div class="icon-container">
-          <i class="material-icons">favorite</i>
-          <i class="material-icons">shopping_cart</i>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping cart</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="navbar">
+      <h1>Shopping Cart</h1>
+      <input type="search" placeholder="Search products..." />
+      <div class="icon-container">
+        <i class="material-icons">favorite</i>
+        <i class="material-icons">shopping_cart</i>
       </div>
-      <div class="sidebar">
-        <div class="categories">
-          <h3>Categories</h3>
-          <ul>
-            <li>Category 1</li>
-            <li>Category 2</li>
-            <li>Category 3</li>
-          </ul>
-        </div>
-        <div class="price-range">
-          <h3>Price Range</h3>
-          <input type="range" min="0" max="1000" />
-        </div>
-        <div class="ratings"></div>
+    </div>
+    <div class="sidebar">
+      <div class="categories">
+        <h3>Categories</h3>
+        <ul>
+          <li>Category 1</li>
+          <li>Category 2</li>
+          <li>Category 3</li>
+        </ul>
       </div>
-      <div class="main">
-        <!-- template to display products -->
-        <!-- <div class="products">
+      <div class="price-range">
+        <h3>Price Range</h3>
+        <input type="range" min="0" max="1000" />
+      </div>
+      <div class="ratings"></div>
+    </div>
+    <div class="main">
+      <!-- template to display products -->
+      <!-- <div class="products">
                 <div class="card">
                     <img src="./assets/earpods.png" alt="Product 1" height="100px">
                     <h3>Earpods</h3>
@@ -45,22 +44,39 @@
                     <button>Add to Cart</button>
                 </div>
                  -->
-      </div>
-      <div class="cart">
-        <h3>Shopping Cart</h3>
-        <div class="cart-items">
-          <img src="./assets/smart-watch.png" height="px" />
-          <h3>Smart watch</h3>
-          <span>$10</span>
-          <div class="buttons-group">
-            <button>-</button>
-            <span id="cart-item-price">1</span>
-            <button>+</button>
-          </div>
-          <button id="remove-btn">Remove</button>
-        </div>
-      </div>
     </div>
-    <script type="module" src="./script.js"></script>
-  </body>
+    <div class="cart-container">
+
+      <h3 style="text-align: center; padding: 0;margin:10px; font-size: 1.5rem;">Shopping Cart</h3>
+      <div class="cart">
+        <!-- <div class="cart-items">
+            <img src="./assets/smart-watch.png" height="px" />
+            <h3>Smart watch</h3>
+            <span>$10</span>
+            <div class="buttons-group">
+              <button>-</button>
+              <span id="cart-item-price">1</span>
+              <button>+</button>
+            </div>
+            <button id="remove-btn">Remove</button> -->
+      </div>
+      <div class="cart-summary">
+        <h3>Cart Summary</h3>
+        <p>Total Items: <span id="total-items">0</span></p>
+        <p>Subtotal: <span id="subtotal">$0</span></p>
+        <p>Tax: <span id="tax">$0</span></p>
+        <hr/>
+        <p>Total Price: <span id="total-price">$0</span></p>
+        <hr/>
+        <button id="checkout-btn">Checkout</button>
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+  </div>
+  <script type="module" src="./script.js"></script>
+</body>
+
 </html>

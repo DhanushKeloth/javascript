@@ -6,7 +6,7 @@ let productsData = [];
 data.then((product) => {
   //store the data
   productsData = product;
-
+  
   const maincontainer = document.querySelector(".main");
 
   const productContainer = document.createElement("div");
@@ -40,13 +40,16 @@ data.then((product) => {
   });
   maincontainer.appendChild(productContainer);
   renderCart();
+  updateCartSummary();
 });
 
 let cartData = JSON.parse(localStorage.getItem("cart")) || [];
 // renderCart();
+
 function renderCart() {
   const cart = document.querySelector(".cart");
   cart.innerHTML = "";
+  
   cartData.forEach((item) => {
     const product = productsData.find((p) => p.id == item.id);
 
@@ -61,7 +64,7 @@ function renderCart() {
     console.log(product.name);
 
     const priceItem = document.createElement("span");
-    priceItem.textContent = product.price*item.quantity;
+    priceItem.textContent = (product.price * item.quantity).toFixed(2);
 
     const cartButtonGroup = document.createElement("div");
     cartButtonGroup.classList.add("buttons-group");
@@ -82,21 +85,22 @@ function renderCart() {
     removeButton.addEventListener("click", () => {
       cartData = cartData.filter((c) => c.id != item.id);
       updateCart();
+      updateCartSummary();
       // cartItems.remove();
     });
     increaseButton.addEventListener("click", () => {
       item.quantity += 1;
-      console.log(item.quantity*product.price);
+
       updateCart();
+      updateCartSummary();
     });
     decreaseButton.addEventListener("click", () => {
-      if(item.quantity>1){
-
+      if (item.quantity > 1) {
         item.quantity -= 1;
-        item.price=item.quantity*product.price;
+
         updateCart();
+        updateCartSummary();
       }
-      
     });
 
     cartItems.appendChild(imageItem);
@@ -109,6 +113,7 @@ function renderCart() {
     cartButtonGroup.appendChild(cartItemQuantity);
     cartButtonGroup.appendChild(increaseButton);
     cart.appendChild(cartItems);
+    
   });
 }
 function updateCart() {
@@ -128,5 +133,30 @@ document.querySelector(".main").addEventListener("click", (e) => {
       });
     }
     updateCart();
+    updateCartSummary();
   }
 });
+
+function calculateSubtotal(){
+  const subtotal = cartData.reduce((acc, item) => {
+    const product = productsData.find((p) => p.id == item.id);
+    return acc + (product.price * item.quantity);
+  }, 0);
+  return subtotal.toFixed(2);
+}
+
+function updateCartSummary(){
+  
+const totalitems = cartData.reduce((acc,item)=>{
+  return acc+item.quantity
+},0)
+const subtotal = Number(calculateSubtotal());
+const tax = subtotal * 0.1;
+const total = subtotal + tax;
+console.log(typeof subtotal)
+
+document.querySelector("#total-items").textContent = totalitems;
+document.querySelector("#subtotal").textContent = subtotal.toFixed(2);
+document.querySelector("#tax").textContent = tax.toFixed(2);
+document.querySelector("#total-price").textContent = total.toFixed(2);
+}
