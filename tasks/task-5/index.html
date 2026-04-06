@@ -20,19 +20,31 @@
       </div>
     </div>
     <div class="sidebar">
-      <div class="categories">
-        <h3>Categories</h3>
-        <ul>
-          <li>Category 1</li>
-          <li>Category 2</li>
-          <li>Category 3</li>
-        </ul>
+      <h3>Categories</h3>
+      <div class="filter-group" id="categoryFilter">
+        <label><input type="checkbox" value="electronics"> Electronics</label>
+        <label><input type="checkbox" value="clothing"> Clothing</label>
+        <label><input type="checkbox" value="home"> Home & Garden</label>
+        <label><input type="checkbox" value="sports"> Sports</label>
       </div>
+      <hr/>
+      <h3>Price Range</h3>
       <div class="price-range">
-        <h3>Price Range</h3>
-        <input type="range" min="0" max="1000" />
+        <input type="range" min="0" max="300" value="150" id="priceRange" />
+          <div class="price-values">
+            <span>$0</span>
+            <span id="priceValue">$150</span>
+            <span>$300</span>
+          </div>
       </div>
-      <div class="ratings"></div>
+      <hr/>
+      <h3>Rating</h3>
+      <div class="filter-group" id="rating-filter">
+        <label><input type="checkbox" value="5"> ⭐⭐⭐⭐⭐</label>
+        <label><input type="checkbox" value="4"> ⭐⭐⭐⭐ & up</label>
+        <label><input type="checkbox" value="3"> ⭐⭐⭐ & up</label>
+        <label><input type="checkbox" value="2"> ⭐⭐ & up</label>
+      </div>
     </div>
     <div class="main">
       <!-- template to display products -->
@@ -46,9 +58,9 @@
                  -->
     </div>
     <div class="cart-container">
-
       <h3 style="text-align: center; padding: 0;margin:10px; font-size: 1.5rem;">Shopping Cart</h3>
       <div class="cart">
+        <!-- template to display cart items -->
         <!-- <div class="cart-items">
             <img src="./assets/smart-watch.png" height="px" />
             <h3>Smart watch</h3>
@@ -70,8 +82,6 @@
         <hr/>
         <button id="checkout-btn">Checkout</button>
       </div>
-
-
     </div>
   </div>
   </div>

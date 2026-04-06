@@ -1,125 +1,16 @@
 import { data } from "./exportData.js";
-
+import { renderProducts } from "./products.js";
+import { updateCart, updateCartSummary, cartData, renderCart } from "./cart.js";
 //store the product data in global variable
 let productsData = [];
-//main container ui
-data.then((product) => {
-  //store the data
-  productsData = product;
-  
-  const maincontainer = document.querySelector(".main");
-
-  const productContainer = document.createElement("div");
-  productContainer.classList.add("products");
-
-  product.forEach((item) => {
-    console.log(item.image.slice(9));
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    const img = document.createElement("img");
-    img.src = "./assets/" + item.image.slice(9);
-    card.appendChild(img);
-
-    const h3 = document.createElement("h3");
-    h3.textContent = item.name;
-    card.appendChild(h3);
-
-    const p = document.createElement("p");
-    p.textContent = item.price;
-    card.appendChild(p);
-
-    const button = document.createElement("button");
-    button.textContent = "Add to Cart";
-    button.classList.add("addToCart");
-    button.dataset.id = item.id; //store the id of the item in the dataset
-
-    card.appendChild(button);
-
-    productContainer.appendChild(card);
-  });
-  maincontainer.appendChild(productContainer);
-  renderCart();
-  updateCartSummary();
+//main
+data.then((products) => {
+  productsData = products;
+  renderProducts(products);
+  renderCart(products);
+  updateCartSummary(products);
 });
 
-let cartData = JSON.parse(localStorage.getItem("cart")) || [];
-// renderCart();
-
-function renderCart() {
-  const cart = document.querySelector(".cart");
-  cart.innerHTML = "";
-  
-  cartData.forEach((item) => {
-    const product = productsData.find((p) => p.id == item.id);
-
-    const cartItems = document.createElement("div");
-    cartItems.classList.add("cart-items");
-
-    const imageItem = document.createElement("img");
-    imageItem.src = "./assets/" + product.image.slice(9);
-
-    const nameItem = document.createElement("h3");
-    nameItem.textContent = product.name;
-    console.log(product.name);
-
-    const priceItem = document.createElement("span");
-    priceItem.textContent = (product.price * item.quantity).toFixed(2);
-
-    const cartButtonGroup = document.createElement("div");
-    cartButtonGroup.classList.add("buttons-group");
-
-    const decreaseButton = document.createElement("button");
-    decreaseButton.textContent = "-";
-
-    const cartItemQuantity = document.createElement("span");
-    cartItemQuantity.textContent = item.quantity;
-
-    const increaseButton = document.createElement("button");
-    increaseButton.textContent = "+";
-
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.setAttribute("id", "remove-btn");
-
-    removeButton.addEventListener("click", () => {
-      cartData = cartData.filter((c) => c.id != item.id);
-      updateCart();
-      updateCartSummary();
-      // cartItems.remove();
-    });
-    increaseButton.addEventListener("click", () => {
-      item.quantity += 1;
-
-      updateCart();
-      updateCartSummary();
-    });
-    decreaseButton.addEventListener("click", () => {
-      if (item.quantity > 1) {
-        item.quantity -= 1;
-
-        updateCart();
-        updateCartSummary();
-      }
-    });
-
-    cartItems.appendChild(imageItem);
-    cartItems.appendChild(nameItem);
-    cartItems.appendChild(priceItem);
-    cartItems.appendChild(cartButtonGroup);
-    cartItems.appendChild(removeButton);
-
-    cartButtonGroup.appendChild(decreaseButton);
-    cartButtonGroup.appendChild(cartItemQuantity);
-    cartButtonGroup.appendChild(increaseButton);
-    cart.appendChild(cartItems);
-    
-  });
-}
-function updateCart() {
-  localStorage.setItem("cart", JSON.stringify(cartData));
-  renderCart();
-}
 document.querySelector(".main").addEventListener("click", (e) => {
   if (e.target.classList.contains("addToCart")) {
     const id = e.target.dataset.id;
@@ -132,31 +23,43 @@ document.querySelector(".main").addEventListener("click", (e) => {
         quantity: 1,
       });
     }
-    updateCart();
-    updateCartSummary();
+    updateCart(productsData);
+    updateCartSummary(productsData);
   }
 });
 
-function calculateSubtotal(){
-  const subtotal = cartData.reduce((acc, item) => {
-    const product = productsData.find((p) => p.id == item.id);
-    return acc + (product.price * item.quantity);
-  }, 0);
-  return subtotal.toFixed(2);
-}
+//filter products by category input checkboxes
+const categoryBoxes = document.querySelectorAll(
+  ".sidebar #categoryFilter input[type='checkbox']",
+); //used to select the category boxes
+function applyFilters() {
+  const selectedCategories = [...categoryBoxes]
+    .filter((box) => box.checked)
+    .map((box) => box.value);
 
-function updateCartSummary(){
+  let filteredProducts = productsData; // start with all
+
   
-const totalitems = cartData.reduce((acc,item)=>{
-  return acc+item.quantity
-},0)
-const subtotal = Number(calculateSubtotal());
-const tax = subtotal * 0.1;
-const total = subtotal + tax;
-console.log(typeof subtotal)
+  if (selectedCategories.length > 0) {
+    filteredProducts = filteredProducts.filter((product) =>
+      selectedCategories.includes(product.category.toLowerCase()),
+    );
+  }
 
-document.querySelector("#total-items").textContent = totalitems;
-document.querySelector("#subtotal").textContent = subtotal.toFixed(2);
-document.querySelector("#tax").textContent = tax.toFixed(2);
-document.querySelector("#total-price").textContent = total.toFixed(2);
+  
+  filteredProducts = filteredProducts.filter(
+    (product) => product.price <= Number(priceRange.value),
+  );
+
+  renderProducts(filteredProducts); //should be inside the event listener because the products should render on each change in category
 }
+categoryBoxes.forEach((box) => {
+  box.addEventListener("change", applyFilters);
+});
+//filter based on price range
+const priceRange = document.querySelector("#priceRange");
+const priceValue = document.querySelector("#priceValue");
+priceRange.addEventListener("input", (e) => {
+  priceValue.textContent = `${priceRange.value}`;
+  applyFilters();
+});
