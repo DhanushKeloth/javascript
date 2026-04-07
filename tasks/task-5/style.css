@@ -82,7 +82,7 @@ body {
 .card button {
   width: 60%;
   /* display: block; */
-  margin:6px ;
+  margin-top:6px ;
   padding: 8px 10px;
   background-color:#1b5ec2;
   color: white;
@@ -90,6 +90,14 @@ body {
   border: none;
   border-radius: 5px;
 
+}
+.rating-container{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rating-container span{
+  font-size: 13px;
 }
 /* cart styling */
 .cart {
@@ -203,14 +211,4 @@ body {
   display: flex;
   justify-content: space-between;
 }
-/* .sidebar .ratings{
-  display: flex;
-  flex-direction: column;
-  font-size: 15px;
-  justify-content: center;
-}
-.ratings label{
-  display: flex;
-  gap: 10px;
-} */
 

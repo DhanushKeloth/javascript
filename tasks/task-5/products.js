@@ -11,15 +11,27 @@ function createProductCard(item) {
 
   const p = document.createElement("p");
   p.textContent = item.price;
-
+  // console.log(item.rating)
+  const ratingContainer = document.createElement("div");
+  ratingContainer.classList.add("rating-container");
+  const star = document.createElement("span");
+  for(let i=0;i<item.rating;i++){
+      star.textContent+="⭐";
+  }
+  const rating = document.createElement("span");
+  rating.textContent=item.rating;
+  ratingContainer.appendChild(star);
+  ratingContainer.appendChild(rating);
+  
   const button = document.createElement("button");
   button.textContent = "Add to Cart";
   button.classList.add("addToCart");
   button.dataset.id = item.id;
-
+  
   card.appendChild(img);
   card.appendChild(h3);
   card.appendChild(p);
+  card.appendChild(ratingContainer);
   card.appendChild(button);
 
   return card;
