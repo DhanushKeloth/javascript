@@ -15,7 +15,7 @@ function applyFilters(categoryBoxes, priceRange, ratingBoxes, productsData) {
     (product) => product.price <= Number(priceRange.value),
   );
 
-  //get selected checkboxes from the rating
+  //get selected checkboxes from the rating elements
   const selectratings = [...ratingBoxes]
     .filter((box) => box.checked)
     .map((box) => Number(box.value));
@@ -31,7 +31,6 @@ function applyFilters(categoryBoxes, priceRange, ratingBoxes, productsData) {
 
 function searchFilter(searchInput, productsData) {
   const query = searchInput.value.toLowerCase();
-
   const filteredProducts = productsData.filter((product) =>
     product.name.toLowerCase().includes(query),
   );

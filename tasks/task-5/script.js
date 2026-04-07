@@ -1,7 +1,7 @@
 import { data } from "./exportData.js";
 import { renderProducts } from "./products.js";
 import { updateCart, updateCartSummary, cartData, renderCart } from "./cart.js";
-import { searchFilter,applyFilters } from "./filters.js";
+import { searchFilter, applyFilters } from "./filters.js";
 //store the product data in global variable
 let productsData = [];
 //main
@@ -35,39 +35,15 @@ document.querySelector(".main").addEventListener("click", (e) => {
 const categoryBoxes = document.querySelectorAll(
   ".sidebar #categoryFilter input[type='checkbox']",
 ); //used to select the category boxes
-// function applyFilters() {
-//   const selectedCategories = [...categoryBoxes]
-//     .filter((box) => box.checked)
-//     .map((box) => box.value);
 
-//   let filteredProducts = productsData; // start with all
-
-//   if (selectedCategories.length > 0) {
-//     filteredProducts = filteredProducts.filter((product) =>
-//       selectedCategories.includes(product.category.toLowerCase()),
-//     );
-//   }
-
-//   filteredProducts = filteredProducts.filter(
-//     (product) => product.price <= Number(priceRange.value),
-//   );
-
-//   //get selected checkboxes from the rating
-//   const selectratings = [...ratingBoxes]
-//     .filter((box) => box.checked)
-//     .map((box) => Number(box.value));
-
-//   if (selectratings.length > 0) {
-//     filteredProducts = filteredProducts.filter((product) =>
-//       selectratings.includes(product.rating),
-//     );
-//   }
-
-//   renderProducts(filteredProducts); //should be inside the event listener because the products should render on each change in category
-// }
 categoryBoxes.forEach((box) => {
-  box.addEventListener("change", ()=>{
-    const filteredProducts = applyFilters(categoryBoxes,priceRange,ratingBoxes,productsData);
+  box.addEventListener("change", () => {
+    const filteredProducts = applyFilters(
+      categoryBoxes,
+      priceRange,
+      ratingBoxes,
+      productsData,
+    );
     renderProducts(filteredProducts);
   });
 });
@@ -77,22 +53,32 @@ const priceRange = document.querySelector("#priceRange");
 const priceValue = document.querySelector("#priceValue");
 priceRange.addEventListener("input", (e) => {
   priceValue.textContent = `${priceRange.value}`;
-  const filteredProducts = applyFilters(categoryBoxes,priceRange,ratingBoxes,productsData);
+  const filteredProducts = applyFilters(
+    categoryBoxes,
+    priceRange,
+    ratingBoxes,
+    productsData,
+  );
   renderProducts(filteredProducts);
 });
 
 //filter products by rating
 const ratingBoxes = document.querySelectorAll("#rating-filter input");
 ratingBoxes.forEach((box) => {
-  box.addEventListener("change", ()=>{
-    const filteredProducts = applyFilters(categoryBoxes,priceRange,ratingBoxes,productsData);
+  box.addEventListener("change", () => {
+    const filteredProducts = applyFilters(
+      categoryBoxes,
+      priceRange,
+      ratingBoxes,
+      productsData,
+    );
     renderProducts(filteredProducts);
   });
 });
 
 //search filters by name
 const searchInput = document.querySelector("#search-product");
-searchInput.addEventListener("input", (e)=>{
-  const filteredProducts = searchFilter(searchInput,productsData);
+searchInput.addEventListener("input", (e) => {
+  const filteredProducts = searchFilter(searchInput, productsData);
   renderProducts(filteredProducts);
 });

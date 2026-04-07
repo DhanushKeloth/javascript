@@ -49,7 +49,22 @@ body {
   font-size: 1.3rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
+.cart-count{
+  background-color: red;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+  position: relative;
+  top: -5px;
+  left: -20px;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* main content styling */
 .main .products {
   display: flex;

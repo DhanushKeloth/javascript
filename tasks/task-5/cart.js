@@ -70,7 +70,9 @@ function renderCart(productsData) {
   });
 }
 function updateCart(productsData) {
+  const cartIconRibbon = document.querySelector(".cart-count");
   localStorage.setItem("cart", JSON.stringify(cartData));
+  cartIconRibbon.textContent = cartData.length;
   renderCart(productsData);
 }
 
